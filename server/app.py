@@ -21,7 +21,6 @@ def index():
 
 @app.route('/games')
 def games():
-
     games = []
     for game in Game.query.all():
         game_dict = game.to_dict()
@@ -49,7 +48,6 @@ def game_by_id(id):
 
 @app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
-
     if request.method == 'GET':
         reviews = []
         for review in Review.query.all():
@@ -62,7 +60,6 @@ def reviews():
         )
 
         return response
-
     elif request.method == 'POST':
         new_review = Review(
             score=request.form.get("score"),
@@ -94,7 +91,6 @@ def review_by_id(id):
         response = make_response(response_body, 404)
 
         return response
-
     else:
         if request.method == 'GET':
             review_dict = review.to_dict()
@@ -105,7 +101,6 @@ def review_by_id(id):
             )
 
             return response
-
         elif request.method == 'PATCH':
             for attr in request.form:
                 setattr(review, attr, request.form.get(attr))
@@ -121,7 +116,6 @@ def review_by_id(id):
             )
 
             return response
-
         elif request.method == 'DELETE':
             db.session.delete(review)
             db.session.commit()
@@ -140,7 +134,6 @@ def review_by_id(id):
 
 @app.route('/users')
 def users():
-
     users = []
     for user in User.query.all():
         user_dict = user.to_dict()
